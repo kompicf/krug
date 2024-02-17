@@ -41,7 +41,7 @@ void config_init(void){
   char field[256];
   int item;
   while (fgets(line, sizeof(line), config_file)) {
-    if (sscanf(line, "%[^:]: %d", field, &item) != 2) break;
+    if (sscanf(line, "%s %d", field, &item) != 2) break;
     for (int i=0; i<9; ++i) {
       if (!strcmp(field, table[i].field)) {
         if (i == 2 /* buffer size */
