@@ -1,5 +1,5 @@
 flagslink  := -lm -lpthread -lSDL2
-flagsbuild := -Wall -Wextra -Wpedantic -Iinclude -Ifont -g
+flagsbuild := -Wall -Wextra -Wpedantic -Iinclude
 objects := $(patsubst src/%.c, build/%.o, $(wildcard src/*.c))
 CC := cc
 

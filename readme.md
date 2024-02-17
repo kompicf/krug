@@ -11,6 +11,7 @@ It isn't very accurate.
 mkdir build
 make release
 ```
+run with ./exe
 
 ## dependencies
 
