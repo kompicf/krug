@@ -35,7 +35,6 @@ void config_init(void){
   FILE *config_file = fopen("config.txt", "r");
   if (!config_file) {
     printf("failed to open config.txt, using default configuration\n");
-    fclose(config_file);
     return;
   }
   char line[1024];
