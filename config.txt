@@ -1,0 +1,9 @@
+sample_rate: 44100
+frames_per_buffer: 256
+buffer_size: 8192
+smoothing_level: 50
+screen_width: 500
+screen_height: 500
+font_size_major: 7
+font_size_minor: 5
+font_size_middle: 8
