@@ -28,3 +28,9 @@ SDL2
 
 configuration is made through simple config.txt file (just change the numbers)  
 the file is read only at start
+
+# how to capture audio from system (not microphone)
+
+idk for windows but in linux I use pavucontrol and select "monitor of something" in input devices
+(you need to select all input devices to see it)
+You also might have to run `sudo modprobe snd-aloop` or something to enable loopback device
