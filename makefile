@@ -1,6 +1,6 @@
 flagslink  := -lm -lpthread -lSDL2
 flagsbuild := -Wall -Wextra -Wpedantic -Iinclude
-objects = $(patsubst src/%.c, build/%.o, $(wildcard src/*.c))
+objects := $(patsubst src/%.c, build/%.o, $(wildcard src/*.c))
 CC := cc
 
 .PHONY: all release debug clean export-compile-flags
