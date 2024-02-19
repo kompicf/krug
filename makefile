@@ -6,13 +6,13 @@ CC := cc
 .PHONY: all release debug clean export-compile-flags
 
 all: $(objects)
-	$(CC) $(objects) -o exe $(flagslink) && ./exe
+	$(CC) $(objects) -o krug $(flagslink) && ./krug
 
 release: $(patsubst %.o, %-O3.o, $(objects))
-	$(CC) $(patsubst %.o, %-O3.o, $(objects)) -o exe -O3 $(flagslink) && ./exe
+	$(CC) $(patsubst %.o, %-O3.o, $(objects)) -o krug -O3 $(flagslink)
 
 debug: $(patsubst %.o, %-g.o, $(objects))
-	$(CC) $(patsubst %.o, %-g.o, $(objects)) -o exe -g $(flagslink) && gdb ./exe
+	$(CC) $(patsubst %.o, %-g.o, $(objects)) -o krug -g $(flagslink) && gdb ./krug
 
 build/%.o:: src/%.c
 	$(CC) -c $< -o $@ $(flagsbuild)
@@ -24,7 +24,7 @@ build/%-g.o:: src/%.c
 	$(CC) -c $< -o $@ $(flagsbuild) -g
 
 clean:
-	rm build/*.o
+	rm build/*.o krug
 
 export-compile-flags:
 	echo "$(flagsbuild) $(flagslink)" | tr -s '[:space:]' '\n' > compile_flags.txt

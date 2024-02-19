@@ -1,4 +1,4 @@
-#include <SDL2/SDL.h>
+#include <SDL2/SDL_render.h>
 #include "font.h"
 
 static inline void render_char(char c, SDL_Rect rect, SDL_Renderer *ren){

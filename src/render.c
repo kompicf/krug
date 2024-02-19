@@ -1,4 +1,5 @@
-#include <SDL2/SDL.h>
+#include <SDL2/SDL_render.h>
+#include <SDL2/SDL_events.h>
 #include "header.h"
 #include "font.h"
 
@@ -148,7 +149,7 @@ static void update_circle_stuff(void){
 int render_init(void){
   update_circle_stuff();
 
-  if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
+  if (SDL_VideoInit(NULL) != 0) {
     fprintf(stderr, "SDL_Init error: %s\n", SDL_GetError());
     return EXIT_FAILURE;
   }
@@ -168,7 +169,7 @@ int render_init(void){
   if (ren == NULL) {
     fprintf(stderr, "SDL_CreateRenderer error: %s\n", SDL_GetError());
     if (win != NULL) SDL_DestroyWindow(win);
-    SDL_Quit();
+    SDL_VideoQuit();
     return EXIT_FAILURE;
   }
 
@@ -230,5 +231,5 @@ void render_update(void){
 void render_terminate(void){
   SDL_DestroyRenderer(ren);
   SDL_DestroyWindow(win);
-  SDL_Quit();
+  SDL_VideoQuit();
 }
