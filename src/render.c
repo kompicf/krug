@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_events.h>
 #include "header.h"
@@ -151,7 +152,7 @@ int render_init(void){
 
   if (SDL_VideoInit(NULL) != 0) {
     fprintf(stderr, "SDL_Init error: %s\n", SDL_GetError());
-    return EXIT_FAILURE;
+    return 1;
   }
 
   win = SDL_CreateWindow("krug",
@@ -162,15 +163,15 @@ int render_init(void){
 
   if (win == NULL) {
     fprintf(stderr, "SDL_CreateWindow error: %s\n", SDL_GetError());
-    return EXIT_FAILURE;
+    return 1;
   }
 
   ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
   if (ren == NULL) {
     fprintf(stderr, "SDL_CreateRenderer error: %s\n", SDL_GetError());
-    if (win != NULL) SDL_DestroyWindow(win);
+    SDL_DestroyWindow(win);
     SDL_VideoQuit();
-    return EXIT_FAILURE;
+    return 1;
   }
 
   return 0;

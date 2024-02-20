@@ -28,8 +28,8 @@ void data_callback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uin
 
 int audio_init(void){
   if (ma_context_init(NULL, 0, NULL, &context) != MA_SUCCESS) {
-    printf("error initizlising context (miniaudio)\n");
-    return -1;
+    fprintf(stderr, "error initizlising context (miniaudio)\n");
+    return 1;
   }
 
   ma_device_config config = ma_device_config_init(ma_device_type_capture);
@@ -40,8 +40,8 @@ int audio_init(void){
   config.dataCallback       = data_callback;
 
   if (ma_device_init(&context, &config, &device) != MA_SUCCESS) {
-    printf("error initializing device (miniaudio)\n");
-    return -1;
+    fprintf(stderr, "error initializing device (miniaudio)\n");
+    return 1;
   }
 
   ma_device_start(&device);
