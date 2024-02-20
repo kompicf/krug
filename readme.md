@@ -3,6 +3,7 @@
 
 Krug is simple program that tries to recognise chords (only major and minor for now).
 You can see how much of each chord it recognised by brightness on circle of fifths and the strongest chord in the middle.
+red is for major chords and blue for minor
 It isn't very accurate.  
 
 ![Image](image.webp)
