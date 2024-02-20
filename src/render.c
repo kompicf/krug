@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <string.h>
+#include <math.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_events.h>
 #include "header.h"
