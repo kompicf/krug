@@ -17,6 +17,7 @@ run with ./exe
 
 ## dependencies
 
+make  
 SDL2
 
 ### included:
