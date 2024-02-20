@@ -44,12 +44,12 @@ void set_circle_colours(void){
       max_major = 0;
     }
     for (int j=0; j<3; ++j) {
-      circle_of_fifths_major[i][0][j].color.r = chords_major[5*i%12]*255;
-      circle_of_fifths_major[i][0][j].color.g = chords_major[5*i%12]*255;
-      circle_of_fifths_major[i][0][j].color.b = chords_major[5*i%12]*255;
-      circle_of_fifths_major[i][1][j].color.r = chords_major[5*i%12]*255;
-      circle_of_fifths_major[i][1][j].color.g = chords_major[5*i%12]*255;
-      circle_of_fifths_major[i][1][j].color.b = chords_major[5*i%12]*255;
+      circle_of_fifths_major[i][0][j].color.r = chords_major[ 5*i   %12]*255;
+      circle_of_fifths_major[i][0][j].color.g = chords_major[ 5*i   %12]*255;
+      circle_of_fifths_major[i][0][j].color.b = chords_major[ 5*i   %12]*255;
+      circle_of_fifths_major[i][1][j].color.r = chords_major[ 5*i   %12]*255;
+      circle_of_fifths_major[i][1][j].color.g = chords_major[ 5*i   %12]*255;
+      circle_of_fifths_major[i][1][j].color.b = chords_major[ 5*i   %12]*255;
       circle_of_fifths_minor[i][0][j].color.r = chords_minor[(5*i+9)%12]*255;
       circle_of_fifths_minor[i][0][j].color.g = chords_minor[(5*i+9)%12]*255;
       circle_of_fifths_minor[i][0][j].color.b = chords_minor[(5*i+9)%12]*255;
