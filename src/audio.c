@@ -32,7 +32,12 @@ int audio_init(void){
     return 1;
   }
 
-  ma_device_config config = ma_device_config_init(ma_device_type_capture);
+# ifdef _WIN32
+    ma_device_config config = ma_device_config_init(ma_device_type_loopback);
+# else
+    ma_device_config config = ma_device_config_init(ma_device_type_capture);
+# endif
+
   config.capture.format     = ma_format_f32;
   config.capture.channels   = 1;
   config.sampleRate         = sample_rate;

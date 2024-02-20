@@ -13,6 +13,7 @@ It isn't very accurate.
 mkdir build
 make release
 ```
+
 run with ./exe
 
 ## dependencies
@@ -28,10 +29,24 @@ SDL2
 # config
 
 configuration is made through simple config.txt file (just change the numbers)  
-the file is read only at start
+the file is only read at start
 
 # how to capture audio from system (not microphone)
 
 idk for windows but in linux I use pavucontrol and select "monitor of something" in input devices
 (you need to select all input devices to see it)
 You also might have to run `sudo modprobe snd-aloop` or something to enable loopback device
+
+# WINDOWS
+
+## compile
+
+If you dont have SDL2 set up you can download dll at [SDL2 github](https://github.com/libsdl-org/SDL)
+under releases->SDL2-something-win32-something.zip and place SDL2.dll in this directory  
+then download header files from the same releases page (they are in SDL2-devel-something-your_compiler.zip)
+and put them in include/SDL2  
+and finally, compile with
+
+```
+gcc -o krug src/* -Iinclude -lSDL2 -L. -mwindows
+```
