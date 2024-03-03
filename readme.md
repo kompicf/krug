@@ -24,7 +24,6 @@ SDL2
 
 ### included:
 
-[miniaudio](https://miniaud.io/)  
 [fft](https://www.kurims.kyoto-u.ac.jp/~ooura/fft.html)
 
 # config

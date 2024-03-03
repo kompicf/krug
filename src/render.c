@@ -153,7 +153,7 @@ int render_init(void){
   update_circle_stuff();
 
   if (SDL_VideoInit(NULL) != 0) {
-    fprintf(stderr, "SDL_Init error: %s\n", SDL_GetError());
+    fprintf(stderr, "SDL_VideoInit error: %s\n", SDL_GetError());
     return 1;
   }
 

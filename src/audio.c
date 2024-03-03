@@ -1,60 +1,53 @@
-#include "header.h"
-#define MINIAUDIO_IMPLEMENTATION
-#include "miniaudio.h"
 #include <stdio.h>
-
-double abs_(double x){ return x>0 ? x : -x; }
-
-ma_context context;
-ma_device device;
+#include <SDL2/SDL_audio.h>
+#include <stdlib.h>
+#include "header.h"
 
 extern double *buffer_fake;
+SDL_AudioDeviceID dev;
 
-void data_callback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount){
-  (void)pDevice;
-  (void)pOutput;
+void data_callback(void *userdata, Uint8 *stream, int lent){
+  (void)userdata;
+  float *in = (float*)stream;
+  int len = lent/4;
 
-  float *in = (float*)pInput;
   /* shift */
-  for (unsigned long i=0; i<buffer_size-frameCount; ++i) {
-    buffer_fake[i] = buffer_fake[i+frameCount];
+  for (int i=0; i<buffer_size-len; ++i) {
+    buffer_fake[i] = buffer_fake[i+len];
   }
   /* add new */
-  for (unsigned long i=0; i < frameCount; i+=1) {
-    buffer_fake[i+buffer_size-frameCount] = in[i];
+  for (int i=0; i < len; i+=1) {
+    buffer_fake[i+buffer_size-len] = in[i];
   }
   algo();
 }
 
 int audio_init(void){
-  if (ma_context_init(NULL, 0, NULL, &context) != MA_SUCCESS) {
-    fprintf(stderr, "error initizlising context (miniaudio)\n");
+  if (SDL_AudioInit(NULL) != 0) {
+    fprintf(stderr, "SDL_AudioInit error: %s\n", SDL_GetError());
     return 1;
   }
 
-# ifdef _WIN32
-    ma_device_config config = ma_device_config_init(ma_device_type_loopback);
-# else
-    ma_device_config config = ma_device_config_init(ma_device_type_capture);
-# endif
+  SDL_AudioSpec want, have;
 
-  config.capture.format     = ma_format_f32;
-  config.capture.channels   = 1;
-  config.sampleRate         = sample_rate;
-  config.periodSizeInFrames = frames_per_buffer;
-  config.dataCallback       = data_callback;
+  /* open output device */
+  SDL_zero(want);
+  want.freq     = sample_rate;
+  want.format   = AUDIO_F32SYS;
+  want.channels = 1;
+  want.samples  = frames_per_buffer;
+  want.callback = data_callback;
+  dev = SDL_OpenAudioDevice(NULL, 1, &want, &have, 0);
 
-  if (ma_device_init(&context, &config, &device) != MA_SUCCESS) {
-    fprintf(stderr, "error initializing device (miniaudio)\n");
+  if (!dev) {
+    fprintf(stderr, "failed to open recording device: %s\n", SDL_GetError());
     return 1;
   }
 
-  ma_device_start(&device);
-
+  SDL_PauseAudioDevice(dev, 0);
   return 0;
 }
 
 void audio_terminate(void){
-  ma_device_uninit(&device);
-  ma_context_uninit(&context);
+  SDL_CloseAudioDevice(dev);
 }
