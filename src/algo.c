@@ -5,7 +5,7 @@
 
 extern int smoothing_level;
 
-static double abs_(double x){ return x>0 ? x : -x; }
+// static double abs_(double x){ return x>0 ? x : -x; }
 
 double notes[12] = {0};
 double notes_sum[12] = {0};
@@ -41,7 +41,7 @@ void algo(void){
   for (int i=50; i < buffer_size; ++i) {
     double pitch = 12*log2((double)sample_rate*i/440.0/buffer_size);
     /* @TODO: put more weight on correct pitch */
-    notes[(((int)round(pitch))+12*50)%12] += buffer[i]*buffer[i]*abs_(pitch-round(pitch));
+    notes[(((int)round(pitch))+12*50)%12] += buffer[i]*buffer[i] /*abs_(pitch-round(pitch))*/;
   }
 
   /* put between 0 and 1 */
